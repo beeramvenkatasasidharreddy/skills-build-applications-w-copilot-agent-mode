@@ -12,9 +12,13 @@ const teams_1 = __importDefault(require("./routes/teams"));
 const users_1 = __importDefault(require("./routes/users"));
 const workouts_1 = __importDefault(require("./routes/workouts"));
 const app = (0, express_1.default)();
+const codespaceName = process.env.CODESPACE_NAME;
+const apiBaseUrl = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev`
+    : 'http://localhost:8000';
 app.use(express_1.default.json());
 app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', service: 'octofit-backend', apiBaseUrl: (0, config_1.getApiBaseUrl)() });
+    res.json({ status: 'ok', service: 'octofit-backend', apiBaseUrl });
 });
 app.use('/api/users', users_1.default);
 app.use('/api/teams', teams_1.default);
@@ -25,7 +29,7 @@ async function startServer() {
     await mongoose_1.default.connect('mongodb://127.0.0.1:27017/octofit_db');
     app.listen(config_1.port, () => {
         console.log(`Backend listening on port ${config_1.port}`);
-        console.log(`API base URL: ${(0, config_1.getApiBaseUrl)()}`);
+        console.log(`API base URL: ${apiBaseUrl}`);
     });
 }
 startServer().catch((error) => {
