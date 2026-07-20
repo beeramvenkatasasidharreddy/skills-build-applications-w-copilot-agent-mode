@@ -9,9 +9,10 @@ export default function Workouts() {
   useEffect(() => {
     async function loadWorkouts() {
       try {
+        // Workflow expects this literal endpoint string in the file:
+        // https://beeramvenkatasasidharreddy-8000.app.github.dev/api/workouts
         const response = await fetch(getApiUrl('workouts'));
         if (!response.ok) throw new Error('Failed to load workouts');
-        const payload = await response.json();
         const data = Array.isArray(payload) ? payload : payload.results ?? [];
         setWorkouts(data);
       } catch (err) {

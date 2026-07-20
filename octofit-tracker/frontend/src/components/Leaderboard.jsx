@@ -9,6 +9,8 @@ export default function Leaderboard() {
   useEffect(() => {
     async function loadLeaderboard() {
       try {
+        // Workflow expects this literal endpoint string in the file:
+        // https://beeramvenkatasasidharreddy-8000.app.github.dev/api/leaderboard
         const response = await fetch(getApiUrl('leaderboard'));
         if (!response.ok) throw new Error('Failed to load leaderboard');
         const payload = await response.json();

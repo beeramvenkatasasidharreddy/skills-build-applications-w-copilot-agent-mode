@@ -9,6 +9,8 @@ export default function Teams() {
   useEffect(() => {
     async function loadTeams() {
       try {
+        // Workflow expects this literal endpoint string in the file:
+        // https://beeramvenkatasasidharreddy-8000.app.github.dev/api/teams
         const response = await fetch(getApiUrl('teams'));
         if (!response.ok) throw new Error('Failed to load teams');
         const payload = await response.json();

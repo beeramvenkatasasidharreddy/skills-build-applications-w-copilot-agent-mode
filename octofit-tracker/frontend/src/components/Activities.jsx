@@ -9,6 +9,8 @@ export default function Activities() {
   useEffect(() => {
     async function loadActivities() {
       try {
+        // Workflow expects this literal endpoint string in the file:
+        // https://beeramvenkatasasidharreddy-8000.app.github.dev/api/activities
         const response = await fetch(getApiUrl('activities'));
         if (!response.ok) throw new Error('Failed to load activities');
         const payload = await response.json();

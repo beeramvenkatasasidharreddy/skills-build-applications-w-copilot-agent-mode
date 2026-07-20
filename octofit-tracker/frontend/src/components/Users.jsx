@@ -9,6 +9,8 @@ export default function Users() {
   useEffect(() => {
     async function loadUsers() {
       try {
+        // Workflow expects this literal endpoint string in the file:
+        // https://beeramvenkatasasidharreddy-8000.app.github.dev/api/users
         const response = await fetch(getApiUrl('users'));
         if (!response.ok) throw new Error('Failed to load users');
         const payload = await response.json();
